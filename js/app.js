@@ -1,5 +1,6 @@
 const GAME = {};
 let openedCards = [];
+let movesNumber = 0;
 Array.prototype.forEach.call(document.querySelectorAll('*'), function(element) {
   element.classList[0] && (GAME[`${element.classList[0]}`] = element);
 });
@@ -71,6 +72,7 @@ function checkCards() {
     console.log('wrong');
     hideCards();
   }
+  updateCounter();
 }
 
 function lockCards() {
@@ -97,3 +99,6 @@ function hideCards() {
   }, 250);
 }
 
+function updateCounter() {
+  GAME['moves'].innerHTML = ++movesNumber;
+}
