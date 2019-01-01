@@ -41,3 +41,15 @@ generateCards();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+GAME['deck'].onclick = function(e) {
+  if(e.target.nodeName !== 'LI' || e.target.className.indexOf('match') > -1 || e.target.className.indexOf('open') > -1) {
+    return;
+  }
+  const CARD = e.target;
+  showCard(CARD);
+};
+
+function showCard(card) {
+  card.className = ('card open show');
+}
