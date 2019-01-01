@@ -12,8 +12,8 @@ html,
 body {
   height: 100%;
   width: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 body {
@@ -51,34 +51,35 @@ h1 {
   width: 660px;
 }
 
-.deck .card {
+.card {
   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
   justify-content: center;
-  background: #2e3d49;
   align-items: center;
+  background: #2e3d49;
+  position: relative;
   border-radius: 8px;
   cursor: pointer;
-  color: #ffffff;
   display: flex;
   height: 125px;
   width: 125px;
   font-size: 0;
+  color: #fff;
 }
 
-.deck .card.open {
+.card.open {
   transform: rotateY(0);
   background: #02b3e4;
   cursor: default;
 }
 
-.deck .card.show {
+.card.show {
   font-size: 33px;
 }
 
-.deck .card.match {
+.card.match {
   background: #02ccba;
-  cursor: default;
   font-size: 33px;
+  cursor: default;
 }
 
 .selected {
@@ -137,19 +138,27 @@ h1 {
   width: 345px;
 }
 
-.score-panel .stars {
+.stars {
   display: inline-block;
   margin: 0 5px 0 0;
   padding: 0;
   margin: 0;
 }
 
-.score-panel .stars li {
+.stars li {
   display: inline-block;
   list-style: none;
 }
 
-.score-panel .restart {
+.moves {
+  margin-left: 40px;
+}
+
+.time {
+  margin-left: 40px;
+}
+
+.restart {
   cursor: pointer;
   float: right;
 }
@@ -190,19 +199,6 @@ button {
   color: white;
 }
 
-.player-name {
-  text-align: center;
-  font-size: 24px;
-}
-
-label,
-.player-name,
-.set-name {
-  margin: 0 auto 10px;
-  display: block;
-  padding: 10px;
-}
-
 .leader-board {
   justify-content: center;
   margin-top: 20px;
@@ -236,4 +232,9 @@ label,
   margin: 0 auto 10px;
   display: block;
   padding: 10px;
+}
+
+.player-name {
+  text-align: center;
+  font-size: 24px;
 }
