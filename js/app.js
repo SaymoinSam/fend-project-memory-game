@@ -50,6 +50,7 @@ GAME['deck'].onclick = function(e) {
   const CARD = e.target;
   showCard(CARD);
   addCard(CARD);
+  openedCards.length > 1 && checkCards();
 };
 
 function showCard(card) {
@@ -58,5 +59,41 @@ function showCard(card) {
 
 function addCard(card) {
   openedCards.push(card);
+}
+
+function checkCards() {
+  console.log('checking');
+  if(openedCards[0].children[0].className === openedCards[1].children[0].className) {
+    console.log('right');
+    lockCards();
+  }
+  else {
+    console.log('wrong');
+    hideCards();
+  }
+}
+
+function lockCards() {
+  openedCards[0].classList.add('right');
+  openedCards[1].classList.add('right');
+  setTimeout(function() {
+    openedCards[0].className = 'card match';
+    openedCards[1].className = 'card match';
+    openedCards[0].classList.remove('right');
+    openedCards[1].classList.remove('right');
+    openedCards = [];
+  }, 250);
+}
+
+function hideCards() {
+  openedCards[0].classList.add('wrong');
+  openedCards[1].classList.add('wrong');
+  setTimeout(function() {
+    openedCards[0].className = 'card';
+    openedCards[1].className = 'card';
+    openedCards[0].classList.remove('wrong');
+    openedCards[1].classList.remove('wrong');
+    openedCards = [];
+  }, 250);
 }
 
