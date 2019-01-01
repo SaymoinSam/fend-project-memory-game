@@ -94,6 +94,7 @@ function checkCards() {
   updateCounter();
   handleScore();
   if(matchedCounter === 8) {
+    GAME['modal-infos'].innerHTML = `With ${movesNumber} Moves and ${playerRank} Stars in about ${timeString(playerTime)}`;
     clearInterval(timer);
     showElements([GAME['modal-container'], GAME['win-modal']]);
   }
