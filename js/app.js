@@ -1,14 +1,36 @@
+const GAME = {};
+Array.prototype.forEach.call(document.querySelectorAll('*'), function(element) {
+  element.classList[0] && (GAME[`${element.classList[0]}`] = element);
+});
 /*
  * Create a list that holds all of your cards
  */
-
+const CARDS = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor',
+  'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle',
+  'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 'fa fa-bolt',
+  'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
+function generateCards() {
+  let fragment = '';
+  for(let i = 0; i < 16; i++) {
+    fragment += `<li class="card">
+      <i class="${CARDS[i]}"></i>
+    </li>`;
+  }
+  GAME['deck'].innerHTML = fragment;
+}
+function shuffleCards() {
+  CARDS.sort(function() {
+    return 0.5 - Math.random();
+  });
+}
+shuffleCards();
+generateCards();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
