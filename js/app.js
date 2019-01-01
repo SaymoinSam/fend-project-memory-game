@@ -16,6 +16,15 @@ function hideElements(elements) {
   });
 }
 
+GAME['set-name'].onclick = function() {
+  playerName = GAME['player-name'].value || 'Guest';
+  GAME['player-name'].value = '';
+  hideElements([GAME['modal-container'], GAME['name-modal']]);
+  play(false, playerName);
+}
+
+showElements([GAME['modal-container'], GAME['name-modal']]);
+
 function play(letsContinue, playerName) {
   let openedCards;
   let movesNumber;
@@ -85,6 +94,14 @@ function play(letsContinue, playerName) {
     openedCards.push(card);
   }
 
+  localStorage.leaderBoard = localStorage.leaderBoard || JSON.stringify([
+    { name: 'Bob', time: 72, rank: 5 },
+    { name: 'Maria', time: 91, rank: 4 },
+    { name: 'John', time: 80, rank: 4 },
+    { name: 'Mark', time: 144, rank: 3 },
+    { name: 'Jean', time: 135, rank: 2 }
+  ]);
+
   function checkCards() {
     console.log('checking');
     if(openedCards[0].children[0].className === openedCards[1].children[0].className) {
@@ -99,9 +116,32 @@ function play(letsContinue, playerName) {
     updateCounter();
     handleScore();
     if(matchedCounter === 8) {
-      GAME['modal-infos'].innerHTML = `With ${movesNumber} Moves and ${playerRank} Stars in about ${timeString(playerTime)}`;
-      clearInterval(timer);
-      showElements([GAME['modal-container'], GAME['win-modal']]);
+      setTimeout(function() {
+        const LEADER_BOARD = JSON.parse(localStorage.leaderBoard),
+          STAR_CODE = '<i class="fa fa-star"></i>';
+        let leaderBoardCode = '<table><caption>Leaderboard</caption><tr><th>Name</th><th>Time</th><th>Rank</th></tr>';
+        for(let i = 0; i < 5; i++) {
+          if(LEADER_BOARD[i].rank <= playerRank && LEADER_BOARD[i].time >= playerTime) {
+            LEADER_BOARD.splice(i, 0, {
+              name: playerName,
+              time: playerTime,
+              rank: playerRank
+            });
+            LEADER_BOARD.pop();
+            break;
+          }
+        }
+        LEADER_BOARD.forEach(function(item) {
+          leaderBoardCode += `<tr><td>${item.name}</td>
+            <td>${timeString(item.time)}</td>
+            <td>${STAR_CODE.repeat(item.rank)}</td></tr>`;
+        });
+        localStorage.leaderBoard = JSON.stringify(LEADER_BOARD);
+        GAME['leader-board'].innerHTML = `${leaderBoardCode}</table>`;
+        GAME['modal-infos'].innerHTML = `With ${movesNumber} Moves and ${playerRank} Stars in about ${timeString(playerTime)}`;
+        clearInterval(timer);
+        showElements([GAME['modal-container'], GAME['win-modal']]);
+      }, 300);
     }
   }
 
@@ -208,5 +248,3 @@ function play(letsContinue, playerName) {
     play();
   };
 }
-
-play();

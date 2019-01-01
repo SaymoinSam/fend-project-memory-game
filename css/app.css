@@ -147,3 +147,41 @@ button {
   padding: 10px;
   color: white;
 }
+
+.player-name {
+  text-align: center;
+  font-size: 24px;
+}
+
+label,
+.player-name,
+.set-name {
+  margin: 0 auto 10px;
+  display: block;
+  padding: 10px;
+}
+
+.leader-board {
+  justify-content: center;
+  margin-top: 20px;
+  display: flex;
+}
+
+table {
+  border-collapse: collapse;
+  width: 250px;
+}
+
+tr {
+  padding: 10px;
+}
+
+th {
+  border-bottom: 2px solid #fff;
+}
+
+th,
+td {
+  padding-left: 15px;
+  text-align: left;
+}
