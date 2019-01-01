@@ -2,6 +2,7 @@ const GAME = {};
 let openedCards = [];
 let movesNumber = 0;
 let matchedCounter = 0;
+let playerRank = 5;
 Array.prototype.forEach.call(document.querySelectorAll('*'), function(element) {
   element.classList[0] && (GAME[`${element.classList[0]}`] = element);
 });
@@ -87,6 +88,7 @@ function checkCards() {
     hideCards();
   }
   updateCounter();
+  handleScore();
   if(matchedCounter === 8) {
     showElements([GAME['modal-container'], GAME['win-modal']]);
   }
@@ -118,4 +120,13 @@ function hideCards() {
 
 function updateCounter() {
   GAME['moves'].innerHTML = ++movesNumber;
+}
+
+function handleScore() {
+  movesNumber > 20 ? playerRank = 1 :
+  movesNumber > 18 ? playerRank = 2 :
+  movesNumber > 16 ? playerRank = 3 :
+  movesNumber > 14 ? playerRank = 4 :
+  playerRank = 5;
+  GAME['stars'].innerHTML = '<li><i class="fa fa-star"></i></li>'.repeat(playerRank);
 }
