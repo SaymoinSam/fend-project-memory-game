@@ -1,4 +1,5 @@
 const GAME = {};
+let openedCards = [];
 Array.prototype.forEach.call(document.querySelectorAll('*'), function(element) {
   element.classList[0] && (GAME[`${element.classList[0]}`] = element);
 });
@@ -48,8 +49,14 @@ GAME['deck'].onclick = function(e) {
   }
   const CARD = e.target;
   showCard(CARD);
+  addCard(CARD);
 };
 
 function showCard(card) {
   card.className = ('card open show');
 }
+
+function addCard(card) {
+  openedCards.push(card);
+}
+
