@@ -81,6 +81,10 @@ h1 {
   font-size: 33px;
 }
 
+.selected {
+  border: 5px solid yellow;
+}
+
 /*
  * Styles for the Score Panel
  */
@@ -132,4 +136,14 @@ h1 {
 
 .hidden {
   display: none;
+}
+
+button {
+  background-color: lightgreen;
+  text-shadow: 1px 1px green;
+  font: bold 24px monospace;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+  color: white;
 }

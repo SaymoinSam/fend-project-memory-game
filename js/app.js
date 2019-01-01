@@ -22,6 +22,7 @@ function play(letsContinue, playerName) {
   let matchedCounter;
   let playerRank;
   let playerTime;
+  let selectIndex;
   let timer = setInterval(function() {
         updateTimer();
       }, 1000);
@@ -160,7 +161,42 @@ function play(letsContinue, playerName) {
     openedCards = [];
     GAME['moves'].innerHTML = 0;
     movesNumber = 0;
+    selectIndex = 0;
     GAME['stars'].innerHTML = '<li><i class="fa fa-star"></i></li>'.repeat(5);
+  };
+
+  function moveSelector(key) {
+    switch(key) {
+      case 37: selectElement(-1); break;
+      case 38: selectElement(-4); break;
+      case 39: selectElement(1); break;
+      default: selectElement(4);
+    }
+  }
+
+  function selectElement(step) {
+    selectIndex + step === 16 ?  selectIndex = 0 :
+    selectIndex + step === -1 ? selectIndex = 15 :
+    selectIndex + step < -1 ?  selectIndex += 12 :
+    selectIndex + step > 16 ?  selectIndex -= 12 :
+    selectIndex += step;
+    for(let i = 0; i < 16; i++) {
+      GAME['deck'].children[i].classList.remove('selected');
+    }
+    GAME['deck'].children[selectIndex].classList.add('selected');
+    console.log(selectIndex);
+  }
+
+  document.body.onkeydown = function(e) {
+    // TODO: if the arrow keys were pressed
+    if(e.keyCode === 40 || e.keyCode === 39 || e.keyCode === 38 || e.keyCode === 37) {
+      moveSelector(e.keyCode);
+    }
+    // TODO: if the enter key was pressed
+    else if(e.keyCode === 13) {
+      GAME['deck'].children[selectIndex].click();
+    }
+    console.log(e.keyCode);
   };
 
   GAME['restart'].onclick = function() {
