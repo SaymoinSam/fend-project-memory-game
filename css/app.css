@@ -85,6 +85,48 @@ h1 {
   border: 5px solid yellow;
 }
 
+.wrong {
+  animation-name: shake-it-wrong;
+  animation-duration: 0.25s;
+}
+
+.right {
+  animation-name: shake-it-right;
+  animation-duration: 0.25s;
+}
+
+/* TODO: simulate NO */
+@keyframes shake-it-wrong {
+  0% {
+    left: -10px;
+  }
+  25% {
+    left: 10px;
+  }
+  50% {
+    left: -10px;
+  }
+  100% {
+    left: 10px;
+  }
+}
+
+/* TODO: simulate YES */
+@keyframes shake-it-right {
+  0%   {
+    top: -10px;
+  }
+  25%  {
+    top: 10px;
+  }
+  50%  {
+    top: -10px;
+  }
+  100% {
+    top: 10px;
+  }
+}
+
 /*
  * Styles for the Score Panel
  */
