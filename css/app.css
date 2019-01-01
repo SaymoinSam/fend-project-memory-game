@@ -185,3 +185,13 @@ td {
   padding-left: 15px;
   text-align: left;
 }
+
+label,
+.player-name,
+.set-name,
+.new-game,
+.continue-game {
+  margin: 0 auto 10px;
+  display: block;
+  padding: 10px;
+}

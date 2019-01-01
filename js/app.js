@@ -16,14 +16,30 @@ function hideElements(elements) {
   });
 }
 
+GAME['continue-modal'].onclick = function(e) {
+  if(e.target.className === 'continue-game') {
+    hideElements([GAME['continue-modal'], GAME['modal-container']]);
+    play(true);
+  }else if(e.target.className === 'new-game') {
+    hideElements([GAME['continue-modal']]);
+    showElements([GAME['name-modal'], GAME['modal-container']]);
+  }
+};
+
 GAME['set-name'].onclick = function() {
-  playerName = GAME['player-name'].value || 'Guest';
+  localStorage.playerName = GAME['player-name'].value || 'Guest';
   GAME['player-name'].value = '';
   hideElements([GAME['modal-container'], GAME['name-modal']]);
-  play(false, playerName);
+  play(false, localStorage.playerName);
 }
 
-showElements([GAME['modal-container'], GAME['name-modal']]);
+if(typeof localStorage.gameState === 'undefined' || localStorage.gameState === 'empty') {
+  hideElements([GAME['continue-modal']]);
+  showElements([GAME['name-modal'], GAME['modal-container']]);
+}else {
+  console.log(localStorage.gameState);
+  showElements([GAME['continue-modal'], GAME['modal-container']]);
+}
 
 function play(letsContinue, playerName) {
   let openedCards;
@@ -34,6 +50,7 @@ function play(letsContinue, playerName) {
   let selectIndex;
   let timer = setInterval(function() {
         updateTimer();
+        saveGameState();
       }, 1000);
   /*
    * Create a list that holds all of your cards
@@ -49,6 +66,16 @@ function play(letsContinue, playerName) {
    *   - add each card's HTML to the page
    */
   restart();
+
+  if(letsContinue) {
+    loadGameState();
+    console.log('continuing');
+  // TODO: shuffle the cards and generate the html content
+  }else {
+    console.log('not continuing');
+    shuffleCards();
+    generateCards();
+  }
   function generateCards() {
     let fragment = '';
     for(let i = 0; i < 16; i++) {
@@ -140,6 +167,7 @@ function play(letsContinue, playerName) {
         GAME['leader-board'].innerHTML = `${leaderBoardCode}</table>`;
         GAME['modal-infos'].innerHTML = `With ${movesNumber} Moves and ${playerRank} Stars in about ${timeString(playerTime)}`;
         clearInterval(timer);
+        localStorage.gameState = 'empty';
         showElements([GAME['modal-container'], GAME['win-modal']]);
       }, 300);
     }
@@ -185,6 +213,31 @@ function play(letsContinue, playerName) {
   function updateTimer() {
     playerTime += 1;
     GAME['time'].innerHTML = timeString(playerTime);
+  }
+
+  function saveGameState() {
+    const CLEAN_DECK = GAME['deck'].innerHTML.replace(' open show', ''),
+      gameState = {
+        playerTime,
+        playerRank,
+        matchedCounter,
+        movesNumber,
+        deck: CLEAN_DECK
+      };
+    localStorage.gameState = JSON.stringify(gameState);
+  }
+
+  function loadGameState() {
+    const GAME_STATE = JSON.parse(localStorage.gameState);
+    playerTime = GAME_STATE.playerTime;
+    playerRank = GAME_STATE.playerRank;
+    matchedCounter = GAME_STATE.matchedCounter;
+    openedCards = [];
+    movesNumber = GAME_STATE.movesNumber;
+    GAME['deck'].innerHTML = `${GAME_STATE.deck}`;
+    GAME['moves'].innerHTML = movesNumber;
+    GAME['stars'].innerHTML = '<li><i class="fa fa-star"></i></li>'.repeat(playerRank);
+    console.log(GAME_STATE);
   }
 
   function timeString(seconds) {
