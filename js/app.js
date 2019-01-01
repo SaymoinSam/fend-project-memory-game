@@ -166,6 +166,11 @@ function play(letsContinue, playerName) {
   GAME['restart'].onclick = function() {
     restart();
   };
+
+  GAME['play-again'].onclick = function() {
+    hideElements([GAME['modal-container'], GAME['win-modal']]);
+    play();
+  };
 }
 
 play();
