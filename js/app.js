@@ -1,9 +1,22 @@
 const GAME = {};
 let openedCards = [];
 let movesNumber = 0;
+let matchedCounter = 0;
 Array.prototype.forEach.call(document.querySelectorAll('*'), function(element) {
   element.classList[0] && (GAME[`${element.classList[0]}`] = element);
 });
+
+function showElements(elements) {
+  elements.forEach(function(element) {
+    element.classList.remove('hidden');
+  });
+}
+
+function hideElements(elements) {
+  elements.forEach(function(element) {
+    element.classList.add('hidden');
+  });
+}
 /*
  * Create a list that holds all of your cards
  */
@@ -67,12 +80,16 @@ function checkCards() {
   if(openedCards[0].children[0].className === openedCards[1].children[0].className) {
     console.log('right');
     lockCards();
+    matchedCounter++;
   }
   else {
     console.log('wrong');
     hideCards();
   }
   updateCounter();
+  if(matchedCounter === 8) {
+    showElements([GAME['modal-container'], GAME['win-modal']]);
+  }
 }
 
 function lockCards() {

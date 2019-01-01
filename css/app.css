@@ -107,3 +107,29 @@ h1 {
   cursor: pointer;
   float: right;
 }
+
+/*
+ * Styles for the modal
+ */
+
+.modal-container {
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  display: flex;
+  color: white;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.modal {
+  text-align: center;
+  width: 300px;
+}
+
+.hidden {
+  display: none;
+}
