@@ -38,7 +38,7 @@ GAME['continue-modal'].onclick = function(e) {
     // TODO: hide the `'.continue-modal'` from the screen
     hideElements([GAME['continue-modal'], GAME['modal-container']]);
     // TODO: continue the game
-    play(true);
+    play(true, localStorage.playerName);
   // TODO: check if the player clicked `'.new-game'` button
   }else if(e.target.className === 'new-game') {
     //TODO: hide the `'.continue-modal'` and show the `'.name-modal'`
