@@ -72,9 +72,8 @@ function play(letsContinue, playerName) {
       saveGameState();
     }, 1000);
   const CARDS = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor',
-    'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle',
-    'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 'fa fa-bolt',
-    'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
+    'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle','fa fa-bomb'];
+  CARDS.push(...CARDS);
   // TODO: initialize all of the variables to their starting value
   restart();
   updateTimer();
