@@ -12,6 +12,11 @@ Click on a card it's then get flipped, then you should click on the card that ha
 
 There is a leaderboard of the top five players, the rating is about the number of stars you get and how many seconds took you to win the game.
 
+## Built With
+
+* [**Font Awesome**](https://www.bootstrapcdn.com/fontawesome/)
+* [**Google Fonts**](https://fonts.google.com/)
+
 ## Creadits
 
 Toumi Fouad Saadi
