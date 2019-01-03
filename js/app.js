@@ -77,6 +77,7 @@ function play(letsContinue, playerName) {
     'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
   // TODO: initialize all of the variables to their starting value
   restart();
+  updateTimer();
   // TODO: check if the game should continue then load the saved game state
   if(letsContinue) {
     loadGameState();
