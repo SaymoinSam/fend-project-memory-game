@@ -139,8 +139,8 @@ function play(letsContinue, playerName) {
   // TODO: add an object property leaderBoard to the localStorage object
   localStorage.leaderBoard = localStorage.leaderBoard || JSON.stringify([
     { name: 'Bob', time: 72, rank: 5 },
-    { name: 'Maria', time: 91, rank: 4 },
-    { name: 'John', time: 80, rank: 4 },
+    { name: 'Maria', time: 80, rank: 4 },
+    { name: 'John', time: 91, rank: 4 },
     { name: 'Mark', time: 144, rank: 3 },
     { name: 'Jean', time: 135, rank: 2 }
   ]);
