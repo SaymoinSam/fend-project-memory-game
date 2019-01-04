@@ -239,7 +239,8 @@
     * @description increments the `moves` and updates it's HTML element's content
     */
     function updateCounter() {
-      GAME['moves'].innerHTML = ++movesNumber;
+      movesNumber++;
+      GAME['moves'].innerHTML = `${movesNumber} ${movesNumber === 1 ? 'Move' : 'Moves'}`;
     }
     /**
     * @description increments the `playerTime` and updates it's HTML element's content
@@ -273,9 +274,8 @@
       openedCards = [];
       movesNumber = GAME_STATE.movesNumber;
       GAME['deck'].innerHTML = `${GAME_STATE.deck}`;
-      GAME['moves'].innerHTML = movesNumber;
+      GAME['moves'].innerHTML = `${movesNumber} ${movesNumber === 1 ? 'Move' : 'Moves'}`;
       GAME['stars'].innerHTML = '<li><i class="fa fa-star"></i></li>'.repeat(playerRank);
-
     }
     /**
     * @description creates a time string of minutes and seconds
@@ -334,7 +334,7 @@
       playerRank = 5;
       matchedCounter = 0;
       openedCards = [];
-      GAME['moves'].innerHTML = 0;
+      GAME['moves'].innerHTML = '0 Moves';
       movesNumber = 0;
       selectIndex = 0;
       GAME['stars'].innerHTML = '<li><i class="fa fa-star"></i></li>'.repeat(5);
