@@ -33,6 +33,13 @@ h1 {
   font-weight: 300;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 700px;
+}
+
 /*
  * Styles for the deck of cards
  */
